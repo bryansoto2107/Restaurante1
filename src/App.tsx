@@ -1,13 +1,23 @@
-import Login from "./pages/login/Login.js"; // Ajusta la ruta si es necesario
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/login/Login";
+import Plantilla from "./components/plantilla/plantilla";
 
-import "./App.css";
-
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route
+        path="/dashboard"
+        element={
+          <Plantilla
+            tituloVentana="Nombre de la ventana"
+            botones={["Inicio", "boton 2", "boton 1"]}
+            usuario="Bryan"
+            rol="Gerente"
+            contenido={<div>Aquí va el contenido dinámico del panel</div>}
+          />
+        }
+      />
+    </Routes>
   );
 }
-
-export default App;

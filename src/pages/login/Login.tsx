@@ -1,16 +1,19 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import comidaImg from "../../assets/comida-panel.png"; // usa tu imagen aquí
+import comidaImg from "../../assets/comida-panel.png";
 
 export default function Login() {
   const [usuario, setUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
+  const navigate = useNavigate();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (usuario === "admin" && contraseña === "1234") {
-      alert("¡Acceso concedido!");
+      navigate("/dashboard"); // ✅ redirige al panel
     } else {
       alert("Usuario o contraseña incorrectos");
     }
