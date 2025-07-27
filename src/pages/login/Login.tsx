@@ -124,11 +124,11 @@ export default function Login() {
             <button type="button" onClick={handleLogin}>
               Iniciar Sesión
             </button>
-            {/* Botón para Registrarse */}
-            <button type="button" onClick={handleRegister}>
+            {/* Botón para Registrarse */
+            /*<button type="button" onClick={handleRegister}>
               Registrarse
-            </button>
-            {/* Muestra mensajes de error o éxito debajo de los botones */}
+            </button>*/
+            /* Muestra mensajes de error o éxito debajo de los botones */}
             {errorMensaje && <p className="error-message">{errorMensaje}</p>}
             {successMensaje && (
               <p className="success-message">{successMensaje}</p>
