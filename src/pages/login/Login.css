@@ -1,0 +1,76 @@
+/* Login.css */
+
+.login-wrapper {
+  background-color: #000; /* Fondo negro total */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  width: 700px;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.login-left {
+  flex: 1;
+  background-color: #0d0d1a;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.login-left h1 {
+  font-size: 2.5rem;
+  color: #8a75ff;
+}
+
+.login-left p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #111;
+  color: white;
+  font-size: 1rem;
+}
+
+.login-form button {
+  padding: 0.75rem;
+  background-color: #7a5ef8;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-right {
+  flex: 1;
+  position: relative;
+}
+
+.login-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Esta línea es clave para evitar bordes morados */
+  display: block;
+}
