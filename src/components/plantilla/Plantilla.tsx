@@ -3,6 +3,10 @@ import type { ReactNode } from "react";
 
 import { FaUserCircle } from "react-icons/fa";
 import "./Plantilla.css";
+interface PlantillaProps {
+  rol: string;
+  nombre: string;
+}
 
 interface PlantillaProps {
   tituloVentana: string;
@@ -36,7 +40,7 @@ export default function Plantilla({
           <div>
             <h1>{tituloVentana}</h1>
             <p>
-              Ejemplo : {rol.toUpperCase()} : {usuario.toUpperCase()}
+              {rol.toUpperCase()} : {usuario.toUpperCase()}
             </p>
           </div>
           <div className="user-icon">

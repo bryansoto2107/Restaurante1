@@ -14,6 +14,7 @@ export default function App() {
             botones={["Inicio", "boton 2", "boton 1"]}
             usuario="Bryan"
             rol="Gerente"
+            nombre="Bryan"
             contenido={<div>Aquí va el contenido dinámico del panel</div>}
           />
         }

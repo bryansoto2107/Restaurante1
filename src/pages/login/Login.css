@@ -10,8 +10,9 @@
 
 .login-container {
   display: flex;
-  width: 700px;
-  height: 400px;
+  /* Aumentado el ancho y alto para dar más espacio */
+  width: 800px; /* Era 700px, ahora más ancho */
+  height: 480px; /* Era 400px, ahora más alto */
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
@@ -20,47 +21,89 @@
 .login-left {
   flex: 1;
   background-color: #0d0d1a;
-  padding: 2rem;
+  padding: 2.5rem; /* Ligeramente más padding para los bordes */
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.2rem; /* Aumentado ligeramente el espacio entre elementos */
+  box-sizing: border-box; /* Crucial para incluir padding en el ancho/alto */
+  min-width: 0; /* Permite que el contenido se encoja si es necesario */
 }
 
 .login-left h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem; /* Ligeramente más grande */
   color: #8a75ff;
+  margin-bottom: 0.5rem; /* Espacio debajo del título */
 }
 
 .login-left p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 1.1rem; /* Ligeramente más grande */
+  margin-bottom: 1.2rem; /* Espacio debajo del párrafo */
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-form input {
-  padding: 0.75rem;
+  padding: 0.85rem; /* Ligeramente más padding en los inputs */
   border: none;
   border-radius: 8px;
   background-color: #111;
   color: white;
   font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .login-form button {
-  padding: 0.75rem;
-  background-color: #7a5ef8;
+  padding: 0.85rem; /* Ligeramente más padding en los botones */
   border: none;
   border-radius: 8px;
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilo específico para el primer botón (Iniciar Sesión) */
+.login-form button:first-of-type {
+  background-color: #7a5ef8;
+}
+
+/* Estilo específico para el segundo botón (Registrarse) */
+.login-form button:nth-of-type(2) {
+  margin-top: 12px; /* Aumentado un poco el margen superior */
+  background-color: #28a745;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.95em; /* Ligeramente más grande */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  text-align: center; /* Centrar el texto para que se vea mejor */
+}
+
+/* Estilos para los mensajes de éxito */
+.success-message {
+  color: green;
+  margin-top: 10px;
+  font-size: 0.95em; /* Ligeramente más grande */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  text-align: center; /* Centrar el texto para que se vea mejor */
 }
 
 .login-right {
@@ -71,6 +114,6 @@
 .login-right img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Esta línea es clave para evitar bordes morados */
+  object-fit: cover;
   display: block;
 }
