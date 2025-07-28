@@ -1,20 +1,30 @@
+// backend/models/User.js
+
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // Asegúrate de haber instalado 'bcryptjs' con npm install bcryptjs
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  username: { // <-- DEBE SER 'username'
+  username: { // Asegúrate de que este es el nombre del campo para el nombre de usuario
     type: String,
     required: true,
-    unique: true,
+    unique: true, // Esto asegura que cada usuario tenga un nombre de usuario único
     trim: true,
   },
-  password: { // <-- DEBE SER 'password'
+  password: {
     type: String,
     required: true,
   },
   role: {
     type: String,
-    enum: ['admin', 'user', 'manager'], // Ajusta estos roles según los que vayas a usar
+    required: true,
+    enum: [
+      'user',
+      'mesonero',
+      'cocinero',
+      'cajero',
+      'gerente',
+      'super_admin'
+    ],
     default: 'user',
   },
 }, { timestamps: true });
@@ -24,14 +34,13 @@ userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) {
     return next();
   }
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
-// Método para comparar contraseñas durante el login
-userSchema.methods.matchPassword = async function(enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

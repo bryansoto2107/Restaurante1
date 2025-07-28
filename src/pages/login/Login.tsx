@@ -1,15 +1,19 @@
+// src/pages/login/Login.tsx
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // Asegúrate de que este archivo exista y contenga tus estilos CSS
+import "./Login.css"; // Asegúrate de que este archivo exista
 import comidaImg from "../../assets/comida-panel.png"; // Ruta a tu imagen de comida
 
 export default function Login() {
   const [usuario, setUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
-  const [errorMensaje, setErrorMensaje] = useState(""); // Estado para mostrar mensajes de error al usuario
-  const [successMensaje, setSuccessMensaje] = useState(""); // Estado para mostrar mensajes de éxito al usuario
+  const [errorMensaje, setErrorMensaje] = useState(""); // Estado para mostrar mensajes de error
+  const [successMensaje, setSuccessMensaje] = useState(""); // Estado para mostrar mensajes de éxito
+
+  // La función handleRegister ha sido eliminada por completo
+  // ya que no se utiliza y causaba el error TS6133 en Vercel.
 
   // Función para manejar el evento de inicio de sesión de usuario
   const handleLogin = async (e: FormEvent) => {
@@ -20,7 +24,7 @@ export default function Login() {
     try {
       // Envía una solicitud POST al endpoint de login de tu backend
       const response = await fetch("http://localhost:3000/auth/login", {
-        // Asegúrate de que esta URL sea la correcta para tu backend
+        // !! IMPORTANTE: Cambia "http://localhost:3000" por la URL de tu backend en producción cuando despliegues !!
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,8 +63,6 @@ export default function Login() {
           <h1>INICIO</h1>
           <p>Bienvenido!</p>
           <form className="login-form">
-            {" "}
-            {/* Eliminado onSubmit aquí para manejar los botones individualmente */}
             <input
               type="text"
               placeholder="Usuario"
@@ -75,13 +77,10 @@ export default function Login() {
               onChange={(e) => setContraseña(e.target.value)}
               required
             />
-            {/* Botón para Iniciar Sesión */}
-            {/* El type="button" es importante para evitar que el formulario se envíe automáticamente */}
             <button type="button" onClick={handleLogin}>
               Iniciar Sesión
             </button>
-            {/* Botón para Registrarse - Estaba comentado, ahora la función handleRegister también se elimina */}
-            {/* Muestra mensajes de error o éxito debajo de los botones */}
+            {/* El botón de Registrarse ya no está aquí ni en el código */}
             {errorMensaje && <p className="error-message">{errorMensaje}</p>}
             {successMensaje && (
               <p className="success-message">{successMensaje}</p>

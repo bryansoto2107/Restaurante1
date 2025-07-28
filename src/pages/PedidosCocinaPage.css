@@ -1,0 +1,192 @@
+/* src/pages/PedidosCocinaPage.css */
+
+.pedidos-cocina-page {
+  padding: 25px;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - var(--header-height, 60px));
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.pedidos-cocina-page h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+}
+
+.pedidos-cocina-page p {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.comanda-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.comanda-column {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-height: 250px; /* Para que todas las columnas tengan una altura base */
+  display: flex;
+  flex-direction: column;
+}
+
+.comanda-column h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid;
+}
+
+/* Colores para los títulos de las columnas */
+.comanda-column:nth-child(1) h3 { border-color: #f0ad4e; color: #f0ad4e; } /* Pendientes - Naranja */
+.comanda-column:nth-child(2) h3 { border-color: #0275d8; color: #0275d8; } /* En Proceso - Azul */
+.comanda-column:nth-child(3) h3 { border-color: #5cb85c; color: #5cb85c; } /* Listos - Verde */
+
+
+.comanda-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.comanda-card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.comanda-card p {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 8px;
+  text-align: left; /* Alinear texto dentro de la tarjeta */
+}
+
+.comanda-card h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #444;
+  font-size: 0.95em;
+}
+
+.comanda-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+.comanda-card ul li {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.comanda-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.comanda-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-process {
+  background-color: #f0ad4e; /* Naranja */
+  color: white;
+}
+.btn-process:hover { background-color: #ec971f; }
+
+.btn-ready {
+  background-color: #5cb85c; /* Verde */
+  color: white;
+}
+.btn-ready:hover { background-color: #449d44; }
+
+.btn-deliver {
+  background-color: #0275d8; /* Azul */
+  color: white;
+}
+.btn-deliver:hover { background-color: #025aa5; }
+
+.btn-cancel {
+  background-color: #d9534f; /* Rojo */
+  color: white;
+}
+.btn-cancel:hover { background-color: #c9302c; }
+
+
+/* Estilos de las tarjetas según el estado */
+.comanda-card.pendiente { border-left: 5px solid #f0ad4e; }
+.comanda-card.en-proceso { border-left: 5px solid #0275d8; }
+.comanda-card.lista { border-left: 5px solid #5cb85c; }
+.comanda-card.entregada { border-left: 5px solid #4a4a4a; opacity: 0.7; }
+.comanda-card.cancelada { border-left: 5px solid #d9534f; opacity: 0.7; }
+.comanda-card.entregada .status-label,
+.comanda-card.cancelada .status-label {
+  font-weight: bold;
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dashed #ccc;
+  font-size: 0.95em;
+}
+.comanda-card.entregada .status-label { color: #4a4a4a; }
+.comanda-card.cancelada .status-label { color: #d9534f; }
+
+.completed-canceled-orders {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 25px;
+}
+
+.completed-canceled-orders h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  border-bottom: 2px solid #6c757d;
+  padding-bottom: 10px;
+}
+
+.comanda-grid-delivered-canceled {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.no-items-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  grid-column: 1 / -1; /* Ocupa todo el ancho si no hay items */
+  padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comanda-columns {
+    grid-template-columns: 1fr;
+  }
+}

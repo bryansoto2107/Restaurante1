@@ -1,0 +1,259 @@
+/* src/pages/MesasComandasPage.css */
+
+.mesas-comandas-page {
+  padding: 25px;
+  background-color: #f4f7f6;
+  min-height: calc(100vh - var(--header-height, 60px)); /* Ajusta si tienes un header */
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.mesas-comandas-page h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+}
+
+.mesas-comandas-page p {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.areas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.area-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.area-card:hover {
+  transform: translateY(-5px);
+}
+
+.area-card h3 {
+  color: #34495e;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.6em;
+}
+
+.area-card p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 8px;
+  text-align: center; /* Asegura que estos p estén centrados */
+}
+
+.area-card .disponibles {
+  font-weight: bold;
+  color: #28a745; /* Verde para disponible */
+}
+
+.mesas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.mesa-item {
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 5px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60px; /* Tamaño fijo para las mesas/sillas */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  position: relative; /* Para el span de estado */
+}
+
+.mesa-item.disponible {
+  background-color: #d4edda; /* Verde claro */
+  border-color: #28a745;
+  color: #155724;
+}
+
+.mesa-item.disponible:hover {
+  background-color: #c3e6cb;
+}
+
+.mesa-item.ocupada {
+  background-color: #f8d7da; /* Rojo claro */
+  border-color: #dc3545;
+  color: #721c24;
+  cursor: not-allowed;
+}
+
+.mesa-item.selected {
+  border: 3px solid #007bff; /* Borde azul para mesa seleccionada */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.mesa-item .estado-ocupada {
+  font-size: 0.7em;
+  font-weight: normal;
+  color: #dc3545;
+  margin-top: 3px;
+}
+
+
+/* SECCIÓN DE COMANDA */
+.comanda-section {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  max-width: 600px;
+  margin: 0 auto 40px auto; /* Centrar y añadir margen inferior */
+}
+
+.comanda-section h3 {
+  text-align: center;
+  color: #34495e;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.comanda-item-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.comanda-item-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.comanda-item-input input[type="number"] {
+  width: 70px; /* Ancho fijo para la cantidad */
+  flex: none; /* Deshabilita el flex-grow */
+  text-align: center;
+}
+
+.remove-item-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.remove-item-btn:hover {
+  background-color: #c82333;
+}
+
+.add-item-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 15px;
+  transition: background-color 0.2s ease;
+  display: block; /* Para que ocupe su propia línea */
+  width: fit-content; /* Se ajusta al contenido */
+  margin-left: auto; /* Centrar si es solo uno, o alinear a la derecha */
+  margin-right: auto;
+}
+
+.add-item-btn:hover {
+  background-color: #0056b3;
+}
+
+.crear-comanda-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-top: 20px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.crear-comanda-btn:hover {
+  background-color: #218838;
+}
+
+.comanda-message {
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.comanda-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.comanda-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .areas-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .area-card {
+    width: 90%; /* Ocupa más ancho en pantallas pequeñas */
+  }
+  .comanda-section {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mesa-item {
+    height: 50px;
+    font-size: 0.9em;
+  }
+  .comanda-item-input {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .comanda-item-input input {
+    width: 100%;
+  }
+  .comanda-item-input input[type="number"] {
+    width: 100%;
+    text-align: left;
+  }
+}

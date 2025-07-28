@@ -1,15 +1,14 @@
+// backend/routes/roles.js
 const express = require("express");
 const router = express.Router();
-const Role = require("../models/Role"); // Asegúrate de que esta ruta sea correcta para tu modelo de Role
-const auth = require("../middleware/authMiddleware"); // Asegúrate de que esta ruta sea correcta para tu middleware de auth
+const Role = require("../models/Role"); // Importa el modelo de Rol
+const auth = require("../middleware/auth"); // Tu middleware de autenticación
 
 // =========================================================
 // OBTENER TODOS LOS ROLES
-// GET /api/roles (si tu index.js monta las rutas con /api)
+// GET /roles/
 // =========================================================
-// Nota: La ruta '/' aquí significa la raíz de donde se monte este router.
-// Si en index.js tienes app.use('/api/roles', rolesRoutes), entonces la ruta completa es /api/roles.
-router.get("/", auth(["admin", "manager"]), async (req, res) => { // Ajusta los roles según tus necesidades (ej. "admin", "manager")
+router.get("/", auth(["super_admin", "gerente"]), async (req, res) => { // Solo super_admin o gerente pueden ver los roles
   try {
     const roles = await Role.find();
     res.json(roles);
@@ -21,18 +20,17 @@ router.get("/", auth(["admin", "manager"]), async (req, res) => { // Ajusta los 
 
 // =========================================================
 // CREAR UN NUEVO ROL
-// POST /api/roles
+// POST /roles/
 // =========================================================
-router.post("/", auth(["admin", "manager"]), async (req, res) => { // Solo "admin" o "manager" pueden crear roles
+router.post("/", auth(["super_admin"]), async (req, res) => { // Solo super_admin puede crear roles
   try {
-    // CAMBIO CRUCIAL: Usar 'name' en lugar de 'nombre' para coincidir con el modelo Role.js
-    const newRole = new Role({ name: req.body.name, description: req.body.description });
+    const { name, description } = req.body; // Espera 'name' y 'description'
+    const newRole = new Role({ name, description });
     await newRole.save();
-    res.status(201).json({ message: "¡Rol creado exitosamente!", role: newRole }); // Incluye el rol creado en la respuesta
+    res.status(201).json({ message: "¡Rol creado exitosamente!", role: newRole });
   } catch (err) {
     console.error("Error al crear rol:", err.message);
-    // Manejo específico si el rol ya existe (unique: true en el modelo)
-    if (err.code === 11000) { // Código de error de duplicado de MongoDB
+    if (err.code === 11000) { // Error de duplicado de MongoDB
       return res.status(400).json({ message: "El nombre del rol ya existe." });
     }
     res.status(400).json({ message: "Error al crear rol.", error: err.message });
@@ -41,9 +39,9 @@ router.post("/", auth(["admin", "manager"]), async (req, res) => { // Solo "admi
 
 // =========================================================
 // ELIMINAR UN ROL POR ID
-// DELETE /api/roles/:id
+// DELETE /roles/:id
 // =========================================================
-router.delete("/:id", auth(["admin"]), async (req, res) => { // Solo "admin" puede eliminar roles (más seguro)
+router.delete("/:id", auth(["super_admin"]), async (req, res) => { // Solo super_admin puede eliminar roles
   try {
     const role = await Role.findByIdAndDelete(req.params.id);
     if (!role) {
