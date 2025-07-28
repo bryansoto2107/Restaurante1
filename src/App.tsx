@@ -1,11 +1,9 @@
 // src/App.tsx
 import { useState } from "react";
-// ¡IMPORTANTE! Ya NO importamos BrowserRouter aquí. Solo Routes y Route.
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Plantilla from "./components/plantilla/Plantilla";
 
-// Importa los componentes de tus páginas
 import RegisterUserPage from "./pages/RegisterUserPage";
 import GerenteViewPage from "./pages/GerenteViewPage";
 import AdminControlPage from "./pages/AdminControlPage";
@@ -13,36 +11,29 @@ import MesasComandasPage from "./pages/MesasComandasPage";
 import PedidosCocinaPage from "./pages/PedidosCocinaPage";
 import CajaPagosPage from "./pages/CajaPagosPage";
 
-// Importa la interfaz Comanda (usando 'type' como buena práctica)
 import type { Comanda } from "./types";
+import { useAuth } from "./context/AuthContext"; // Importa useAuth
 
 export default function App() {
-  // *** SIMULACIÓN DEL ROL DEL USUARIO ***
-  // En una aplicación real, 'userRole' y 'userName' vendrían
-  // del estado global de autenticación después de que el usuario inicie sesión.
-  // Para probar, puedes cambiar el valor de 'userRole' aquí:
-  const userRole = "super_admin"; // Cambia estos valores para probar diferentes roles
-  const userName = "bryan";
+  // *** YA NO SIMULAMOS EL ROL, LO OBTENEMOS DEL CONTEXTO ***
+  const { user } = useAuth(); // Obtiene el objeto user del contexto
 
-  // Estado global para las comandas que se envían a cocina
+  // Si el usuario no ha iniciado sesión, o el contexto no está listo, usa valores por defecto
+  const userName = user ? user.username : "";
+  const userRole = user ? user.role : "invitado"; // Un rol por defecto si no hay user
+
   const [comandasCocina, setComandasCocina] = useState<Comanda[]>([]);
 
-  // Función para añadir una comanda a la lista del cocinero
   const addComandaToCocina = (newComanda: Comanda) => {
     setComandasCocina((prevComandas) => [...prevComandas, newComanda]);
   };
 
   return (
-    // ¡IMPORTANTE! Hemos eliminado el componente <Router> aquí.
-    // Tu <App /> debe estar envuelto por <BrowserRouter> solo en src/main.tsx
     <Routes>
-      {/* Ruta para la página de Login */}
       <Route path="/" element={<Login />} />
 
-      {/*
-        Ruta para el Dashboard principal.
-        Aquí la Plantilla recibe un contenido genérico de bienvenida.
-      */}
+      {/* Todas las rutas ahora usarán el userRole y userName del contexto */}
+      {/* ... (el resto de tus rutas con Plantilla) ... */}
       <Route
         path="/dashboard"
         element={
@@ -60,11 +51,6 @@ export default function App() {
         }
       />
 
-      {/*
-        Rutas para cada una de las funcionalidades del sistema.
-        Cada una usa la Plantilla y le pasa un componente diferente como 'contenido'.
-        Los botones del menú en la Plantilla te llevarán a estas rutas.
-      */}
       <Route
         path="/dashboard/register-user"
         element={
@@ -77,6 +63,7 @@ export default function App() {
           />
         }
       />
+      {/* ... y así para todas las demás rutas que usen Plantilla ... */}
       <Route
         path="/dashboard/gerente-view"
         element={
@@ -109,7 +96,6 @@ export default function App() {
             usuario={userName}
             rol={userRole}
             nombre={userName}
-            // Pasa la función para añadir comandas a la página de mesas
             contenido={
               <MesasComandasPage onPlaceOrderToCocina={addComandaToCocina} />
             }
@@ -124,7 +110,6 @@ export default function App() {
             usuario={userName}
             rol={userRole}
             nombre={userName}
-            // Pasa las comandas y la función para actualizarlas a la página de cocina
             contenido={
               <PedidosCocinaPage
                 comandas={comandasCocina}
@@ -146,7 +131,6 @@ export default function App() {
           />
         }
       />
-      {/* Puedes añadir más rutas si es necesario */}
     </Routes>
   );
 }

@@ -1,119 +1,265 @@
-/* Login.css */
+/* src/pages/login/Login.css */
 
-.login-wrapper {
-  background-color: #000; /* Fondo negro total */
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Fondo completamente negro para toda la página */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* Fondo negro total */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0; /* Color de texto general para la página */
+    overflow: hidden; /* Evita barras de desplazamiento no deseadas */
 }
 
+/* Contenedor principal que CENTRA el panel en la pantalla */
 .login-container {
-  display: flex;
-  /* Aumentado el ancho y alto para dar más espacio */
-  width: 800px; /* Era 700px, ahora más ancho */
-  height: 480px; /* Era 400px, ahora más alto */
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center; /* Centra el panel horizontalmente */
+    align-items: center;     /* Centra el panel verticalmente */
+    min-height: 100vh;       /* Asegura que ocupe toda la altura de la ventana para el centrado */
+    background-color: #000000; /* Asegura que el fondo siga siendo negro */
+    padding: 20px; /* Un poco de padding para que no se pegue a los bordes en pantallas pequeñas */
+    box-sizing: border-box;
 }
 
-.login-left {
-  flex: 1;
-  background-color: #0d0d1a;
-  padding: 2.5rem; /* Ligeramente más padding para los bordes */
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.2rem; /* Aumentado ligeramente el espacio entre elementos */
-  box-sizing: border-box; /* Crucial para incluir padding en el ancho/alto */
-  min-width: 0; /* Permite que el contenido se encoja si es necesario */
+/* El PANEL CENTRADO - La "caja" principal que contiene todo */
+.login-panel {
+    display: flex; /* Usa flexbox para dividir el panel en dos mitades (formulario e imagen) */
+    width: 90%; /* Ancho del panel, ajusta si quieres que sea más estrecho o ancho */
+    max-width: 1400px; /* Ancho máximo para que no sea demasiado grande en pantallas amplias */
+    height: 90vh; /* Altura fija para el panel */
+    max-height: 1100px; /* Altura máxima */
+    background-color: transparent; /* Fondo transparente, ya que los sub-paneles tendrán su color */
+    border-radius: 15px; /* Bordes redondeados para el panel */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra para que destaque */
+    overflow: hidden; /* Importante para que los bordes redondeados se apliquen a los hijos */
 }
 
-.login-left h1 {
-  font-size: 2.8rem; /* Ligeramente más grande */
-  color: #8a75ff;
-  margin-bottom: 0.5rem; /* Espacio debajo del título */
+/* Estilos para el panel del FORMULARIO (mitad izquierda) */
+.login-form-panel {
+    flex: 1; /* Ocupa la mitad del espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido del formulario verticalmente */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    padding: 60px; /* Padding interno generoso para el formulario */
+    box-sizing: border-box;
+    color: #e0e0e0; /* Color de texto para el formulario */
+    order: 1; /* Asegura que el formulario vaya a la izquierda */
+    background-color: #0A0D15; /* ¡NUEVO: Azul súper oscuro para el panel del formulario! */
+    overflow-y: auto; /* Permite scroll si el contenido, incluyendo mensajes, es muy largo */
 }
 
-.login-left p {
-  font-size: 1.1rem; /* Ligeramente más grande */
-  margin-bottom: 1.2rem; /* Espacio debajo del párrafo */
+/* Título "INICIO" */
+.login-form-panel h2 {
+    color: #e0e0e0;
+    margin-bottom: 5px;
+    font-size: 3.5em;
+    font-weight: 800;
+    text-align: left;
+    width: 100%;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  box-sizing: border-box;
+/* Párrafo "Bienvenido!" */
+.login-form-panel p {
+    color: #e0e0e0;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: left;
 }
 
-.login-form input {
-  padding: 0.85rem; /* Ligeramente más padding en los inputs */
-  border: none;
-  border-radius: 8px;
-  background-color: #111;
-  color: white;
-  font-size: 1rem;
-  width: 100%;
-  box-sizing: border-box;
+/* Párrafo "Ingresa tus datos..." */
+.login-form-panel p.subtext {
+    font-size: 1.1em;
+    color: #a0a0a0;
+    margin-bottom: 40px;
 }
 
-.login-form button {
-  padding: 0.85rem; /* Ligeramente más padding en los botones */
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
+/* Grupo de formulario (label y input) */
+.form-group {
+    width: 100%;
+    margin-bottom: 30px; /* Más espacio entre grupos */
+    position: relative;
 }
 
-/* Estilo específico para el primer botón (Iniciar Sesión) */
-.login-form button:first-of-type {
-  background-color: #7a5ef8;
+/* Estilos para los LABELS */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e0e0e0; /* Blanco suave */
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
 }
 
-/* Estilo específico para el segundo botón (Registrarse) */
-.login-form button:nth-of-type(2) {
-  margin-top: 12px; /* Aumentado un poco el margen superior */
-  background-color: #28a745;
+/* Efecto al enfocar el input: el label cambia de color */
+.form-group input:focus + label {
+    color: #be82e0; /* Un púrpura más brillante al enfocar */
 }
 
-/* Estilos para los mensajes de error */
-.error-message {
-  color: red;
-  margin-top: 10px;
-  font-size: 0.95em; /* Ligeramente más grande */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  max-width: 100%;
-  text-align: center; /* Centrar el texto para que se vea mejor */
+.form-group input {
+    width: 100%;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    color: #333333;
+    background-color: #E0E0E0; /* Fondo gris claro/blanco para el input */
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, border 0.3s ease;
 }
 
-/* Estilos para los mensajes de éxito */
+.form-group input::placeholder {
+    color: #aaaaaa;
+}
+
+.form-group input:focus {
+    border: 2px solid #7a42bb; /* Borde púrpura al enfocar */
+    box-shadow: 0 0 0 4px rgba(122, 66, 187, 0.3); /* Resplandor púrpura al enfocar */
+    outline: none;
+}
+
+/* Botón "Iniciar Sesión" */
+.login-form-panel button {
+    width: 100%;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 30px;
+    color: #ffffff;
+    background-color: #7A42BB; /* Púrpura para el botón */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.login-form-panel button:hover {
+    background-color: #6a34a1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.login-form-panel button:active {
+    transform: translateY(0);
+}
+
+/* Mensajes de error y éxito - ¡Adaptados para permanecer dentro del panel! */
+.error-message,
 .success-message {
-  color: green;
-  margin-top: 10px;
-  font-size: 0.95em; /* Ligeramente más grande */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  max-width: 100%;
-  text-align: center; /* Centrar el texto para que se vea mejor */
+    width: 100%; /* Ocupa el 100% del ancho del panel de formulario */
+    padding: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    text-align: center;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-weight: 600;
+    flex-shrink: 0; /* Asegura que no se encoja */
 }
 
-.login-right {
-  flex: 1;
-  position: relative;
+.error-message {
+    background-color: #c94040; /* Rojo oscuro */
+    border: 1px solid #ac3636;
 }
 
-.login-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.success-message {
+    background-color: #4CAF50; /* Verde */
+    border: 1px solid #3d8c40;
+}
+
+/* Estilos para el panel de la IMAGEN (mitad derecha) */
+.login-image-panel {
+    flex: 1; /* Ocupa la otra mitad del espacio disponible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #592582; /* Fondo púrpura para la imagen, como en tu diseño */
+    padding: 0; /* ¡NUEVO: Sin padding para que la imagen ocupe todo el espacio y no haya "borde morado"! */
+    box-sizing: border-box;
+    order: 2; /* Asegura que la imagen vaya a la derecha */
+}
+
+.login-image-panel img {
+    width: 100%; /* La imagen ocupa el 100% del ancho del panel */
+    height: 100%; /* La imagen ocupa el 100% del alto del panel */
+    object-fit: cover; /* ¡NUEVO: Cubre el área manteniendo el aspecto, recorta si es necesario! */
+    display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+/* Media Queries para diseño responsivo */
+
+/* Para pantallas más pequeñas (tablet y móviles) */
+@media (max-width: 850px) {
+    .login-panel {
+        flex-direction: column; /* Apila los paneles verticalmente */
+        width: 95%;
+        max-width: 500px;
+        height: auto; /* La altura se ajusta automáticamente */
+        min-height: auto;
+    }
+
+    .login-image-panel {
+        flex: none; /* Elimina la proporción flex */
+        width: 100%; /* Ocupa todo el ancho */
+        height: 250px; /* Altura fija para la imagen en móvil */
+        border-radius: 15px 15px 0 0; /* Bordes redondeados solo arriba */
+        padding: 0; /* Sin padding en móvil también */
+    }
+
+    .login-image-panel img {
+        object-fit: contain; /* Puedes usar contain en móvil si prefieres que no se recorte */
+    }
+
+    .login-form-panel {
+        flex: none; /* Elimina la proporción flex */
+        width: 100%; /* Ocupa todo el ancho */
+        padding: 30px; /* Ajusta el padding */
+        border-radius: 0 0 15px 15px; /* Bordes redondeados solo abajo */
+    }
+
+    .login-form-panel h2 {
+        font-size: 2.5em; /* Ajusta tamaño del título */
+    }
+
+    .form-group label {
+        font-size: 1.1em; /* Ajusta tamaño de label en móvil */
+    }
+
+    .form-group input,
+    .login-form-panel button {
+        padding: 15px 18px; /* Menor padding en inputs y botones */
+        font-size: 1.1em;
+    }
+}
+
+/* Para pantallas muy pequeñas (móviles estrechos) */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+
+    .login-panel {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .login-image-panel {
+        height: 200px; /* Reduce un poco más la altura de la imagen */
+        border-radius: 0;
+    }
+
+    .login-form-panel {
+        padding: 25px 20px;
+        border-radius: 0;
+    }
+
+    .login-form-panel h2 {
+        font-size: 2em;
+    }
 }
