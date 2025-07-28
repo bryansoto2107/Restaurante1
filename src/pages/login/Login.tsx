@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Asegúrate de que este archivo exista
 import comidaImg from "../../assets/comida-panel.png"; // Ruta a tu imagen de comida
 
+// *** ¡NUEVA LÍNEA IMPORTANTE! ***
+// Obtenemos la URL del backend de las variables de entorno de Vite
+const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
+
 export default function Login() {
   const [usuario, setUsuario] = useState("");
   const [contraseña, setContraseña] = useState("");
@@ -21,10 +25,16 @@ export default function Login() {
     setErrorMensaje(""); // Limpia mensajes de error previos
     setSuccessMensaje(""); // Limpia mensajes de éxito previos
 
+    // *** VALIDACIÓN BÁSICA PARA EVITAR ENVIAR CAMPOS VACÍOS ***
+    if (!usuario || !contraseña) {
+      setErrorMensaje("Por favor, introduce usuario y contraseña.");
+      return;
+    }
+
     try {
       // Envía una solicitud POST al endpoint de login de tu backend
-      const response = await fetch("http://localhost:3000/auth/login", {
-        // !! IMPORTANTE: Cambia "http://localhost:3000" por la URL de tu backend en producción cuando despliegues !!
+      // ¡AHORA USAMOS LA VARIABLE DE ENTORNO BACKEND_URL!
+      const response = await fetch(`${BACKEND_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +49,10 @@ export default function Login() {
         console.log("Inicio de sesión exitoso:", data);
         // Aquí es donde normalmente guardarías un token de autenticación (JWT) si tu backend lo envía
         // localStorage.setItem('token', data.token);
-        navigate("/dashboard"); // Redirige al usuario a la página del dashboard
+        setSuccessMensaje("Inicio de sesión exitoso. Redirigiendo..."); // Mensaje de éxito
+        setTimeout(() => {
+          navigate("/dashboard"); // Redirige al usuario a la página del dashboard
+        }, 1000); // Pequeño retraso para que el usuario vea el mensaje de éxito
       } else {
         // Si la respuesta HTTP indica un error
         setErrorMensaje(
@@ -51,7 +64,7 @@ export default function Login() {
       // Captura cualquier error de red
       console.error("Error de conexión al iniciar sesión:", error);
       setErrorMensaje(
-        "No se pudo conectar con el servidor para iniciar sesión. Verifica tu conexión."
+        "No se pudo conectar con el servidor para iniciar sesión. Verifica tu conexión e inténtalo de nuevo."
       );
     }
   };
